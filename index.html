@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>WINION VIRUS INTRO CARD</title>
+  <link rel="icon" href="./assets/winion_virus_b.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="theme-system-page">
+  <div class="desktop">
+    <aside class="maker-window">
+      <div class="win-titlebar maker-titlebar">
+        <div class="title-left">
+          <img src="./assets/winion_virus_w.ico" alt="" class="title-icon" />
+          <span class="title-text">Profile_Setup.sys</span>
+        </div>
+        <div class="title-buttons">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="maker-body">
+        <div class="form-grid">
+          <div class="field full">
+            <label for="theme">테마 선택</label>
+            <select id="theme">
+  <option value="system">시스템 위니언</option>
+  <option value="ion">아이온</option>
+  <option value="bo">보</option>
+  <option value="grid">그리드</option>
+  <option value="fix">픽스</option>
+  <option value="debug">디버그</option>
+  <option disabled>──────────</option>
+  <option value="float">플로트</option>
+</select>
+          </div>
+
+          <div class="field full export-hide">
+            <label for="profileUpload">프로필 사진</label>
+            <label class="upload-box" for="profileUpload">
+              <input type="file" id="profileUpload" accept="image/*" />
+              <span class="upload-main">프로필 이미지를 업로드하세요</span>
+              <span class="upload-sub">정사각형 카드에 맞게 자동 표시됩니다.</span>
+            </label>
+          </div>
+
+          <div class="field">
+            <label for="username">닉네임</label>
+            <input type="text" id="username" placeholder="@nickname" maxlength="30" />
+          </div>
+
+          <div class="field">
+            <label for="age">나이 표기</label>
+            <select id="age">
+              <option value="20↑">20↑</option>
+              <option value="20↓">20↓</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="fubfree">FUB</label>
+            <input type="text" id="fubfree" placeholder="예: 이별 시 언팔" />
+          </div>
+
+          <div class="field">
+            <label for="gameOwned">게임 구매 여부</label>
+            <select id="gameOwned">
+              <option value="O">O</option>
+              <option value="X">X</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="favorite">최애</label>
+            <input type="text" id="favorite" placeholder="예: 아이온" maxlength="30" />
+          </div>
+
+          <div class="field">
+            <label for="pairing">최애 커플링</label>
+            <input type="text" id="pairing" placeholder="예: A×B" maxlength="30" />
+          </div>
+
+          <div class="field full">
+            <label>연성 성향</label>
+            <div class="check-row creation-row" id="creationGroup">
+              <label><input type="checkbox" value="글" /> <span>글</span></label>
+              <label><input type="checkbox" value="그림" /> <span>그림</span></label>
+              <label><input type="checkbox" value="영상" /> <span>영상</span></label>
+              <label><input type="checkbox" value="소비" /> <span>소비</span></label>
+            </div>
+            <input type="text" id="creationFree" class="sub-input" placeholder="추가로 적고 싶은 연성 성향" maxlength="200" />
+          </div>
+
+          <div class="field full">
+            <label>트윗 성향</label>
+            <div class="check-row tweet-row" id="tweetGroup">
+              <label><input type="checkbox" value="RT" /> <span>RT</span></label>
+              <label><input type="checkbox" value="마음" /> <span>마음</span></label>
+              <label><input type="checkbox" value="탐라대화" /> <span>탐라대화</span></label>
+              <label><input type="checkbox" value="사담" /> <span>사담</span></label>
+              <label><input type="checkbox" value="욕설" /> <span>욕설</span></label>
+              <label><input type="checkbox" value="고어" /> <span>고어</span></label>
+              <label><input type="checkbox" value="수위" /> <span>수위</span></label>
+              <label><input type="checkbox" value="타 장르 언급" /> <span>타 장르 언급</span></label>
+            </div>
+            <input type="text" id="tweetFree" class="sub-input" placeholder="추가로 적고 싶은 트윗 성향" maxlength="200" />
+          </div>
+
+          <div class="field full">
+            <label for="hateFree">지뢰(싫어하는 것)</label>
+            <textarea id="hateFree" maxlength="200" placeholder="예: 스포일러 등"></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="oneLine">한마디</label>
+            <textarea id="oneLine" maxlength="300" placeholder="잘 부탁드립니다!"></textarea>
+          </div>
+        </div>
+
+       <div class="button-row">
+  <button id="resetBtn" type="button">입력 초기화</button>
+  <button id="saveBtn" type="button" class="primary">이미지 저장</button>
+</div>
+      </div>
+    </aside>
+
+    <main class="preview-window" id="exportTarget">
+      <div class="win-titlebar preview-titlebar">
+        <div class="title-left">
+          <img src="./assets/winion_virus_w.ico" alt="" class="title-icon" />
+          <span class="title-text">SYSTEM WINDOW</span>
+        </div>
+        <div class="title-buttons">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="preview-body">
+        <div class="capture-wrap" id="captureTarget">
+          <section class="profile-card theme-system" id="introCard">
+            <div class="card-top">
+              <div class="logo-line">
+                <div class="card-logo-wrap">
+                  <h1 class="card-logo">
+                    <span class="logo-wi">WI</span>
+                    <span class="logo-ni">NI</span>
+                    <span class="logo-o">O</span>
+                    <span class="logo-n">N</span>
+                    <span class="logo-virus">VIRUS</span>
+                  </h1>
+                </div>
+                <div class="theme-badge" id="themeBadge">시스템 위니언 테마</div>
+              </div>
+            </div>
+
+            <div class="mini-strip">
+              <p>WINION SYSTEM ACTIVE 위니언 바이러스 자기소개 생성기 V.01</p>
+              <p class="card-kicker">By.@Shrimp_live</p>
+            </div>
+
+            <div class="card-layout">
+              <div class="left-column">
+                <div class="portrait-panel">
+                  <div class="portrait-frame-wrap">
+                    <div class="portrait-frame square" id="portraitFrame">
+                      <div class="portrait-screen">
+                        <div class="no-signal-screen">No Signal</div>
+                        <img id="previewImage" alt="프로필 미리보기" />
+                      </div>
+
+                      <div class="face-id-dock">FACE ID</div>
+                    </div>
+                     <div class="float-flower-badge">
+    <img src="./assets/winion_virus_p.png" alt="flower">
+  </div>
+                  </div>
+                </div>
+
+                <div class="user-status-box">
+                  <div class="bubble-label mini">USER STATUS</div>
+
+                  <div class="status-item">
+                    <div class="bubble-label mini">닉네임</div>
+                    <div class="status-text" id="previewUsername">@nickname</div>
+                  </div>
+
+                  <div class="status-row-double">
+                    <div class="status-item">
+                      <div class="bubble-label mini">나이</div>
+                      <div class="status-text" id="previewAge">20↑</div>
+                    </div>
+
+                    <div class="status-item">
+                      <div class="bubble-label mini">게임 구매</div>
+                      <div class="status-text" id="previewGameOwned">O</div>
+                    </div>
+                  </div>
+
+                  <div class="status-item">
+                    <div class="bubble-label mini">FUB</div>
+                    <div class="status-text" id="previewFub">FUB FREE</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="right-column">
+                <div class="content-grid top-target-grid">
+                  <div class="target-item">
+                    <div class="bubble-label mini">최애</div>
+                    <div class="target-text" id="previewFavorite">-</div>
+                  </div>
+
+                  <div class="target-item">
+                    <div class="bubble-label mini">최애 커플링</div>
+                    <div class="target-text" id="previewPairing">-</div>
+                  </div>
+                </div>
+
+                <div class="info-box wide">
+                  <div class="bubble-label">연성 성향</div>
+                  <div class="box-value" id="previewCreation">-</div>
+                </div>
+
+                <div class="info-box wide">
+                  <div class="bubble-label">트윗 성향</div>
+                  <div class="box-value" id="previewTweet">-</div>
+                </div>
+
+                <div class="info-box wide">
+                  <div class="bubble-label">지뢰</div>
+                  <div class="box-value multiline" id="previewHate">-</div>
+                </div>
+
+                <div class="info-box wide message-box">
+                  <div class="bubble-label">한마디</div>
+                  <div class="box-value multiline" id="previewOneLine">잘 부탁드립니다!</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bottom-bar">
+              <div class="bottom-left">
+                <span class="start-btn">
+                  <img src="./assets/winion_virus_g.png" class="start-icon" />
+                  <span>시작</span>
+                </span>
+
+                <span class="task-divider"></span>
+
+                <span class="task-btn">
+                  <img src="./assets/winion_virus_fil.png" class="task-icon" />
+                  <span>Profile.exe</span>
+                </span>
+
+                <span class="task-btn">
+                  <img src="./assets/winion_virus_fil.png" class="task-icon" />
+                  <span>Theme.sys</span>
+                </span>
+              </div>
+
+              <div class="bottom-right">
+                <div class="bottom-time" id="bottomTime">00:00</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="error-capture hidden" id="errorCapture">
+            <div class="error-capture-inner">
+              <div class="error-dialog">
+                <div class="error-titlebar">
+                  <span>시스템 오류</span>
+                  <span class="error-close">✕</span>
+                </div>
+                <div class="error-dialog-body">
+                  <div class="error-icon">✖</div>
+                  <div class="error-text">
+                    <p id="errorTitleText">접근 권한이 없는 데이터입니다.</p>
+                    <p class="adult-warning" id="errorReasonText">※ 위니언 바이러스는 성인 게임 입니다.</p>
+                  </div>
+                </div>
+                <div class="error-actions">
+                  <button type="button" class="error-ok">확인</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <p class="save-hint">저장 시 입력창은 제외되고 SYSTEM WINDOW 전체가 PNG로 저장됩니다.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script defer src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+  <script defer src="./js/script.js"></script>
+</body>
+</html>
