@@ -59,7 +59,7 @@ html,
 body {
   width: 100%;
   min-height: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 body {
@@ -236,10 +236,10 @@ body.theme-float-page {
 .desktop {
   position: relative;
   z-index: 1;
-  width: 1560px;
-  min-width: 1560px;
+  width: min(1200px, 100%);
+  min-width: 0;
   display: grid;
-  grid-template-columns: 320px 1220px;
+  grid-template-columns: 300px 1fr;
   gap: 18px;
   align-items: start;
   justify-content: center;
@@ -677,7 +677,7 @@ textarea {
 
 .card-layout {
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 18px;
   padding: 0 20px 16px;
   align-items: start;
@@ -1172,9 +1172,8 @@ textarea {
 /* ===== 캡처 전용 레이아웃 고정 ===== */
 
 .capture-fix {
-  width: 1220px !important;
+  width: 960px !important;
 }
-
 .capture-fix .profile-card {
   min-height: 690px !important;
 }
@@ -1435,6 +1434,100 @@ body.theme-float-page .logo-virus {
 
 }
 
+.preview-window {
+  max-width: 960px;
+}
+
+.profile-card {
+  max-width: 960px;
+  margin: 0 auto;
+}
 
 
+/* =========================
+   PC 레이아웃 유지 + 모바일 축소
+   ========================= */
 
+@media (max-width: 768px) {
+  body {
+    overflow-x: auto;
+  }
+
+  .desktop {
+    transform: scale(0.6);
+    transform-origin: top left;
+    width: 1560px; /* 원래 크기 유지 */
+  }
+}
+
+.profile-card {
+  font-size: 17px;
+}
+
+.status-text,
+.target-text,
+.box-value {
+  font-size: 18px;
+}
+
+.bubble-label {
+  font-size: 15px;
+}
+.mini-info-box {
+  margin-top: 12px;
+  border: 2px solid var(--frame-line);
+  background: rgba(18, 18, 24, 0.85); /* 검은 패널 느낌 */
+  padding: 10px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.mini-info-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.05) 0,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  pointer-events: none;
+}
+
+.mini-info-text {
+  color: #99f0bb; /* 시스템 느낌 초록 */
+  font-size: 10px;
+  line-height: 1.4;
+  font-family: pixelBold, sans-serif;
+  opacity: 0.8;
+}
+
+.target-item {
+  justify-content: center;
+}
+
+.target-text {
+  text-align: center;
+}
+.target-item {
+  min-width: 0;
+}
+
+.target-item .bubble-label.mini {
+  flex: 0 0 auto;
+}
+
+.target-text {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+}

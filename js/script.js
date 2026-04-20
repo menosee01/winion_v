@@ -384,7 +384,6 @@ async function makeBlobFromTarget(target, options = {}) {
     skipAutoScale: true,
     style: {
       margin: "0",
-      transform: "none"
     }
   });
 }
@@ -427,9 +426,6 @@ async function saveCardImage() {
     el.errorCapture.classList.remove("hidden");
   }
 
-  if (el.captureTarget) {
-    el.captureTarget.classList.add("capture-fix");
-  }
 
   try {
     await waitForStableLayout();
@@ -466,9 +462,7 @@ async function saveCardImage() {
     console.error("저장 실패:", error);
     alert(`이미지 저장 중 오류가 발생했습니다.\n\n${message}`);
   } finally {
-    if (el.captureTarget) {
-      el.captureTarget.classList.remove("capture-fix");
-    }
+
 
     if (shouldShowError && el.errorCapture) {
       el.errorCapture.classList.add("hidden");
