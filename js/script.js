@@ -366,24 +366,50 @@ function downloadBlob(blob, filename) {
 }
 
 async function makeBlobFromTarget(target, options = {}) {
-  if (!window.htmlToImage || typeof window.htmlToImage.toBlob !== "function") {
+  if (!window.htmlToImage) {
     throw new Error("html-to-image 라이브러리가 로드되지 않았습니다.");
   }
 
-  const width = target.scrollWidth || target.offsetWidth;
-  const height = target.scrollHeight || target.offsetHeight;
+  const sourceWidth = target.scrollWidth || target.offsetWidth;
+  const sourceHeight = target.scrollHeight || target.offsetHeight;
+
+  const exportWidth = options.exportWidth ?? 1200;
+  const exportHeight = Math.round(sourceHeight * (exportWidth / sourceWidth));
+  const pixelRatio = options.pixelRatio ?? 1;
+  const backgroundColor = options.backgroundColor ?? "#ffffff";
+  const quality = options.quality ?? 0.92;
+
+  if (typeof window.htmlToImage.toJpeg === "function") {
+    const dataUrl = await window.htmlToImage.toJpeg(target, {
+      cacheBust: true,
+      pixelRatio,
+      backgroundColor,
+      quality,
+      width: sourceWidth,
+      height: sourceHeight,
+      canvasWidth: exportWidth,
+      canvasHeight: exportHeight,
+      skipAutoScale: true,
+      style: {
+        margin: "0"
+      }
+    });
+
+    const response = await fetch(dataUrl);
+    return await response.blob();
+  }
 
   return await window.htmlToImage.toBlob(target, {
     cacheBust: true,
-    pixelRatio: options.pixelRatio ?? 2,
-    backgroundColor: options.backgroundColor ?? null,
-    width,
-    height,
-    canvasWidth: width * (options.pixelRatio ?? 2),
-    canvasHeight: height * (options.pixelRatio ?? 2),
+    pixelRatio,
+    backgroundColor,
+    width: sourceWidth,
+    height: sourceHeight,
+    canvasWidth: exportWidth,
+    canvasHeight: exportHeight,
     skipAutoScale: true,
     style: {
-      margin: "0",
+      margin: "0"
     }
   });
 }
@@ -394,8 +420,10 @@ async function tryCreateBlob(target) {
 
   try {
     blob = await makeBlobFromTarget(target, {
-      pixelRatio: 2,
-      backgroundColor: null
+      exportWidth: 1200,
+      pixelRatio: 1,
+      quality: 0.92,
+      backgroundColor: "#ffffff"
     });
     if (blob) return blob;
   } catch (error) {
@@ -404,8 +432,10 @@ async function tryCreateBlob(target) {
 
   try {
     blob = await makeBlobFromTarget(target, {
+      exportWidth: 1000,
       pixelRatio: 1,
-      backgroundColor: "#00000000"
+      quality: 0.88,
+      backgroundColor: "#ffffff"
     });
     if (blob) return blob;
   } catch (error) {
@@ -453,10 +483,10 @@ async function saveCardImage() {
       throw new Error("이미지 Blob 생성에 실패했습니다.");
     }
 
-    downloadBlob(
-      blob,
-      shouldShowError ? "winion_virus_error.png" : "winion_intro_card.png"
-    );
+  downloadBlob(
+  blob,
+  shouldShowError ? "winion_virus_error.jpg" : "winion_intro_card.jpg"
+);
   } catch (error) {
     const message = normalizeErrorMessage(error);
     console.error("저장 실패:", error);
