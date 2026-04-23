@@ -295,21 +295,21 @@ function updateErrorMessage(reason) {
   if (reason === "minor-and-unowned") {
     el.errorTitleText.textContent = "접근 권한이 없는 데이터입니다.";
     el.errorReasonText.textContent =
-      "※ 위니언 바이러스는 성인 게임이며, 게임 구매 후 이용해주세요.";
+      "※ 경고 : 접근 권한이 없는 사용자입니다.";
     return;
   }
 
   if (reason === "minor") {
     el.errorTitleText.textContent = "접근 권한이 없는 데이터입니다.";
     el.errorReasonText.textContent =
-      "※ 위니언 바이러스는 성인 게임입니다.";
+      "※ 경고 : 접근 권한이 없는 사용자입니다.";
     return;
   }
 
   if (reason === "unowned") {
     el.errorTitleText.textContent = "접근 권한이 없는 데이터입니다.";
     el.errorReasonText.textContent =
-      "※ 위니언 바이러스 게임 구매 후 이용해주세요.";
+      "※ 경고 : 접근 권한이 없는 사용자입니다.";
     return;
   }
 
